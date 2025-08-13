@@ -44,6 +44,11 @@
 					<div class="progress"><div id="dash-hydration-bar" class="bar"></div></div>
 				</div>
 			</div>
+			<div class="card" id="history-card">
+				<h3>Last 7 Days</h3>
+				<p class="muted">Daily snapshots of calories, water, and supplements</p>
+				<ul id="history-list" class="list"></ul>
+			</div>
 		</section>
 
 		<section id="nutrition" class="panel is-hidden" role="tabpanel" aria-hidden="true">
@@ -73,7 +78,13 @@
 			<h2 class="panel-title">Supplement Tracker</h2>
 			<p class="subtitle">Manage your daily supplements</p>
 			<div class="card">
-				<h3>Today's Supplements</h3>
+				<div class="row between center">
+					<h3>Today's Supplements</h3>
+					<div class="row gap-s">
+						<button class="btn" id="add-supp-btn">Add Supplement</button>
+						<button class="btn ghost" id="reset-supp-btn">Reset Taken</button>
+					</div>
+				</div>
 				<p class="muted"><span id="supp-summary">0 of 0 supplements taken</span></p>
 				<ul id="supplement-list" class="list"></ul>
 			</div>
@@ -100,26 +111,16 @@
 		<section id="fitness" class="panel is-hidden" role="tabpanel" aria-hidden="true">
 			<h2 class="panel-title">Fitness Tracker</h2>
 			<p class="subtitle">Track your workouts and exercise progress</p>
+
+			<div id="current-workout" class="card hidden"></div>
+
 			<div class="grid two">
 				<div class="card">
-					<h3>Start Workout</h3>
-					<p class="muted">Choose a workout to begin</p>
-					<ul class="list">
-						<li class="list-row">
-							<div>
-								<div class="title">Push Day</div>
-								<div class="muted small">3 exercises • ~65min</div>
-							</div>
-							<button class="btn" data-workout="Push Day" data-duration="65">Start</button>
-						</li>
-						<li class="list-row">
-							<div>
-								<div class="title">Pull Day</div>
-								<div class="muted small">2 exercises • ~70min</div>
-							</div>
-							<button class="btn" data-workout="Pull Day" data-duration="70">Start</button>
-						</li>
-					</ul>
+					<div class="row between center">
+						<h3>Workout Plans</h3>
+						<button class="btn" id="add-plan-btn">New Plan</button>
+					</div>
+					<ul id="plan-list" class="list"></ul>
 				</div>
 				<div class="card">
 					<h3>Weekly Progress</h3>
