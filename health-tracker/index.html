@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Health Tracker</title>
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚕️</text></svg>">
+	<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+	<header class="page-header">
+		<div class="container">
+			<h1>Health Tracker</h1>
+			<p class="subtitle">Track your nutrition, supplements, hydration, and fitness</p>
+		</div>
+	</header>
+
+	<nav class="tabs">
+		<div class="container tabs-inner" role="tablist" aria-label="Health sections">
+			<button class="tab is-active" data-tab="dashboard" aria-selected="true" role="tab">📊 <span>Dashboard</span></button>
+			<button class="tab" data-tab="nutrition" role="tab">🍎 <span>Nutrition</span></button>
+			<button class="tab" data-tab="supplements" role="tab">🔗 <span>Supplements</span></button>
+			<button class="tab" data-tab="hydration" role="tab">💧 <span>Hydration</span></button>
+			<button class="tab" data-tab="fitness" role="tab">🏋️ <span>Fitness</span></button>
+		</div>
+	</nav>
+
+	<main class="container main">
+		<section id="dashboard" class="panel" role="tabpanel">
+			<h2 class="panel-title">Overview</h2>
+			<div class="grid two">
+				<div class="card">
+					<h3>Daily Progress</h3>
+					<p class="muted">Calories and macros vs. goals</p>
+					<div class="progress-row"><div class="label">Calories <span id="dash-calories-label"></span></div><div class="progress"><div id="dash-calories" class="bar"></div></div></div>
+					<div class="progress-row"><div class="label">Protein <span id="dash-protein-label"></span></div><div class="progress"><div id="dash-protein" class="bar"></div></div></div>
+					<div class="progress-row"><div class="label">Carbs <span id="dash-carbs-label"></span></div><div class="progress"><div id="dash-carbs" class="bar"></div></div></div>
+					<div class="progress-row"><div class="label">Fat <span id="dash-fat-label"></span></div><div class="progress"><div id="dash-fat" class="bar"></div></div></div>
+				</div>
+				<div class="card">
+					<h3>Hydration</h3>
+					<p class="muted">Today's water intake</p>
+					<div class="big-stat"><span id="dash-hydration"></span></div>
+					<div class="progress"><div id="dash-hydration-bar" class="bar"></div></div>
+				</div>
+			</div>
+		</section>
+
+		<section id="nutrition" class="panel is-hidden" role="tabpanel" aria-hidden="true">
+			<h2 class="panel-title">Nutrition Tracker</h2>
+			<p class="subtitle">Track your daily nutrition intake</p>
+			<div class="grid two">
+				<div class="card">
+					<h3>Daily Progress</h3>
+					<p class="muted">Calories and macros vs. goals</p>
+					<div class="progress-row"><div class="label">Calories <span id="nutr-calories-label"></span></div><div class="progress"><div id="nutr-calories" class="bar"></div></div></div>
+					<div class="progress-row"><div class="label">Protein <span id="nutr-protein-label"></span></div><div class="progress"><div id="nutr-protein" class="bar"></div></div></div>
+					<div class="progress-row"><div class="label">Carbs <span id="nutr-carbs-label"></span></div><div class="progress"><div id="nutr-carbs" class="bar"></div></div></div>
+					<div class="progress-row"><div class="label">Fat <span id="nutr-fat-label"></span></div><div class="progress"><div id="nutr-fat" class="bar"></div></div></div>
+				</div>
+				<div class="card">
+					<div class="row between center">
+						<h3>Food Entries</h3>
+						<button class="btn" id="add-meal-btn">Add Meal</button>
+					</div>
+					<p class="muted">Today's logged meals</p>
+					<ul id="meal-list" class="list"></ul>
+				</div>
+			</div>
+		</section>
+
+		<section id="supplements" class="panel is-hidden" role="tabpanel" aria-hidden="true">
+			<h2 class="panel-title">Supplement Tracker</h2>
+			<p class="subtitle">Manage your daily supplements</p>
+			<div class="card">
+				<h3>Today's Supplements</h3>
+				<p class="muted"><span id="supp-summary">0 of 0 supplements taken</span></p>
+				<ul id="supplement-list" class="list"></ul>
+			</div>
+		</section>
+
+		<section id="hydration" class="panel is-hidden" role="tabpanel" aria-hidden="true">
+			<h2 class="panel-title">Hydration Tracker</h2>
+			<p class="subtitle">Track your daily water intake</p>
+			<div class="card">
+				<div class="row between center">
+					<h3>Today's Hydration</h3>
+					<div class="row gap-s">
+						<button class="btn" data-add="250">+250 ml</button>
+						<button class="btn" data-add="500">+500 ml</button>
+						<button class="btn ghost" id="undo-water">Undo</button>
+					</div>
+				</div>
+				<p class="muted">Keep sipping throughout the day</p>
+				<div class="big-stat"><span id="water-label"></span></div>
+				<div class="progress large"><div id="water-bar" class="bar"></div></div>
+			</div>
+		</section>
+
+		<section id="fitness" class="panel is-hidden" role="tabpanel" aria-hidden="true">
+			<h2 class="panel-title">Fitness Tracker</h2>
+			<p class="subtitle">Track your workouts and exercise progress</p>
+			<div class="grid two">
+				<div class="card">
+					<h3>Start Workout</h3>
+					<p class="muted">Choose a workout to begin</p>
+					<ul class="list">
+						<li class="list-row">
+							<div>
+								<div class="title">Push Day</div>
+								<div class="muted small">3 exercises • ~65min</div>
+							</div>
+							<button class="btn" data-workout="Push Day" data-duration="65">Start</button>
+						</li>
+						<li class="list-row">
+							<div>
+								<div class="title">Pull Day</div>
+								<div class="muted small">2 exercises • ~70min</div>
+							</div>
+							<button class="btn" data-workout="Pull Day" data-duration="70">Start</button>
+						</li>
+					</ul>
+				</div>
+				<div class="card">
+					<h3>Weekly Progress</h3>
+					<p class="muted"><span id="workout-summary"></span></p>
+					<div class="progress large"><div id="workout-bar" class="bar"></div></div>
+					<h4 class="subheading">Recent Workouts</h4>
+					<ul id="recent-workouts" class="list"></ul>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="container footer">
+		<p class="muted small">Data is stored locally in your browser using localStorage.</p>
+	</footer>
+
+	<script src="./app.js"></script>
+</body>
+</html>
